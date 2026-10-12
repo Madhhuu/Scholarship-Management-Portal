@@ -1,45 +1,57 @@
+
 package com.scholarship;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Student student = new Student(
-                "S001",
-                "Gayathiri",
-                "gayathiri@gmail.com",
-                8.5,
-                250000
-        );
+        ScholarshipService service = new ScholarshipService();
 
-        Scholarship scholarship = new Scholarship(
+        Scholarship s1 = new Scholarship(
                 "SCH001",
                 "Merit Scholarship",
                 50000,
                 "Minimum CGPA 8.0"
         );
 
-        Application application = new Application(
-                "APP001",
-                "SUBMITTED",
-                scholarship
+        Scholarship s2 = new Scholarship(
+                "SCH002",
+                "Need Based Scholarship",
+                30000,
+                "Annual income below 300000"
         );
 
-        System.out.println("===== STUDENT DETAILS =====");
-        System.out.println("Student ID: " + student.getStudentId());
-        System.out.println("Name: " + student.getName());
-        System.out.println("Email: " + student.getEmail());
-        System.out.println("CGPA: " + student.getCgpa());
-        System.out.println("Annual Income: ₹" + student.getAnnualIncome());
+        // CREATE
+        System.out.println("===== ADD SCHOLARSHIPS =====");
+        service.addScholarship(s1);
+        service.addScholarship(s2);
 
-        System.out.println();
+        // READ
+        System.out.println("\n===== ALL SCHOLARSHIPS =====");
+        service.displayAllScholarships();
 
-        System.out.println("===== SCHOLARSHIP DETAILS =====");
-        scholarship.displayScholarshipDetails();
+        // SEARCH
+        System.out.println("\n===== SEARCH SCH001 =====");
+        Scholarship found = service.findScholarshipById("SCH001");
 
-        System.out.println();
+        if (found != null) {
+            found.displayScholarshipDetails();
+        } else {
+            System.out.println("Scholarship not found.");
+        }
 
-        System.out.println("===== APPLICATION DETAILS =====");
-        application.displayApplicationDetails();
+        // UPDATE
+        System.out.println("\n===== UPDATE SCH001 =====");
+        boolean updated = service.updateScholarship("SCH001", 60000);
+        System.out.println("Updated: " + updated);
+
+        // DELETE
+        System.out.println("\n===== DELETE SCH002 =====");
+        boolean deleted = service.deleteScholarship("SCH002");
+        System.out.println("Deleted: " + deleted);
+
+        // FINAL LIST
+        System.out.println("\n===== FINAL SCHOLARSHIP LIST =====");
+        service.displayAllScholarships();
     }
 }

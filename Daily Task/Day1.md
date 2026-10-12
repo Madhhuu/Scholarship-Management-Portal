@@ -1,27 +1,30 @@
-# Day 1 – Scholarship Management Portal
+# Day 1 – Project Setup and Environment Configuration
 
-## Project
-Scholarship Management Portal
+## 1. Objective
+To understand the Scholarship Management Portal project and prepare the development environment required for Java development.
 
-## Core Requirement
-The system should allow students to apply for scholarships, manage scholarship details, verify eligibility, and track the status of scholarship applications.
+## 2. Project Overview
+The Scholarship Management Portal is designed to simplify scholarship management for students and educational institutions. It aims to provide a centralized platform for publishing scholarship schemes, checking eligibility, submitting applications, verifying student details, approving scholarships, and tracking application status.
 
-## Technology
-- Java
-- Maven
-- Git
-- GitHub
-- VS Code
+## 3. Tools and Technologies
+- Java – Programming language
+- VS Code – Code editor
+- Git – Version control
+- GitHub – Source code repository
+- PowerShell Terminal – Compiling and executing Java programs
 
-## Work Completed
-- Installed and configured Java JDK
-- Installed Java extensions in VS Code
-- Installed and configured Maven
-- Created GitHub repository
-- Cloned the repository
-- Created Daily Task folder
-- Created Day1 folder
-- Created Project folder
-- Created README.md
-- Set up the initial Maven project structure
-- Verified the project setup
+## 4. Tasks Performed
+- Studied the basic objectives of the project.
+- Reviewed the project requirements provided during training.
+- Checked the Java development environment.
+- Configured VS Code for writing and running Java code.
+- Created the project directory and Java source files.
+- Created a GitHub repository for maintaining project files.
+- Added a README file to introduce the project.
+- Created a folder to maintain daily task reports.
+
+## 5. Learning Outcomes
+Understood the importance of development environment configuration, project organization, and version control in software development.
+
+## 6. Outcome
+The initial development environment and project structure were prepared for implementing the Scholarship Management Portal.

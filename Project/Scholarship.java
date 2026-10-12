@@ -33,4 +33,13 @@ public class Scholarship {
     public double getAmount() {
         return amount;
     }
+    public void setAmount(double amount) {
+    if (amount <= 0) {
+        throw new IllegalArgumentException(
+                "Scholarship amount must be positive."
+        );
+    }
+
+    this.amount = amount;
+}
 }

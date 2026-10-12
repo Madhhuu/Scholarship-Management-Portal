@@ -1,66 +1,50 @@
-Day 3 – Scholarship Application, Eligibility and Status Management
+# Day 3 – Scholarship CRUD Implementation
 
-Objective
-Implement scholarship creation, student application processing, eligibility verification, application status management, and exception handling for the Scholarship Management Portal.
+## 1. Objective
+To implement basic Create, Read, Update, and Delete operations for scholarship schemes using Java.
 
-Tasks
-1. Scholarship Management
-- Create the Scholarship class.
-- Store scholarship details such as name, amount, eligibility criteria, and deadline.
-- Create ScholarshipRepository.
-- Use Map<String, Scholarship> for scholarship lookup.
-- Create ScholarshipFactory for scholarship object creation.
-2. Student Management
-- Create the Student class.
-- Store student details such as student ID, name, email, CGPA, and annual income.
-- Create StudentRepository.
-- Use Map<String, Student> for student lookup.
-- Validate student information before application.
-3. Eligibility Management
-- Create the EligibilityStrategy interface.
-- Implement MeritEligibility.
-- Implement IncomeBasedEligibility.
-- Check whether a student satisfies the scholarship requirements.
-- Return eligibility status based on the student's details.
-4. Scholarship Application Management
-- Create the Application class.
-- Create ApplicationService.
-- Allow eligible students to apply for scholarships.
-- Generate a unique application ID.
-- Link the student with the selected scholarship.
-- Prevent duplicate applications for the same scholarship.
-5. Application Status
-Implement the following statuses:
-- SUBMITTED
-- UNDER_REVIEW
-- APPROVED
-- REJECTED
-6. Application Tracking
-- Create ApplicationRepository.
-- Use Map<String, Application> for application lookup.
-- Allow students to check their application status.
-- Allow the application status to be updated during the review process.
-- Identify pending applications using Queue<Application>.
-7. Exception Handling
-Create:
-- InvalidApplicationException – Checked Exception
-- ScholarshipNotFoundException – Unchecked Exception
-- StudentNotFoundException – Unchecked Exception
-- DuplicateApplicationException – Checked Exception
-8. Testing
-Create JUnit tests for:
-- Student creation
-- Scholarship creation
-- Scholarship lookup
-- Student eligibility verification
-- Successful scholarship application
-- Ineligible student application
-- Duplicate application
-- Application status update
-- Scholarship not found
-- Student not found
-9. Final Verification
-Run:
-mvn clean
-mvn test
-mvn package
+## 2. Theory Studied
+CRUD operations are commonly used to manage records in software applications.
+
+- **Create:** Add a scholarship record.
+- **Read:** Display or search for scholarship information.
+- **Update:** Modify existing scholarship details.
+- **Delete:** Remove a scholarship record.
+
+The Java ArrayList collection was used to store scholarship objects temporarily in memory.
+
+## 3. Tasks Performed
+- Implemented the Scholarship class with fields for scholarship ID, scholarship name, amount, and eligibility criteria.
+- Created a constructor to initialize scholarship details.
+- Added getter methods to access scholarship information.
+- Implemented validation to prevent non-positive scholarship amounts.
+- Created the ScholarshipService class.
+- Used ArrayList to maintain a collection of scholarship objects.
+- Implemented adding and displaying scholarships.
+- Implemented searching for a scholarship using its ID.
+- Implemented updating a scholarship amount.
+- Implemented deleting a scholarship record.
+- Added a check to prevent duplicate scholarship IDs.
+
+## 4. Main Program Implementation
+Updated the Main class to create sample scholarship records and call the service methods.
+
+Two sample records were used:
+- SCH001 – Merit Scholarship
+- SCH002 – Need Based Scholarship
+
+## 5. Testing Performed
+- Added both scholarship records.
+- Displayed all available scholarships.
+- Searched for SCH001.
+- Updated the amount of SCH001 from ₹50,000 to ₹60,000.
+- Deleted SCH002.
+- Displayed the final scholarship list.
+
+## 6. Learning Outcomes
+Learned how to organize Java code into separate classes, manage objects using ArrayList, validate input values, and implement CRUD operations through service methods.
+
+## 7. Outcome
+Successfully compiled and executed the Java console prototype. The output confirmed that scholarship creation, display, search, update, and deletion were working.
+
+Note: The current prototype stores data in memory. Database integration has not yet been implemented.
