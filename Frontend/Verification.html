@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Verification | Scholarship Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #1e293b;
+        }
+
+        header {
+            background: #173b72;
+            color: white;
+            padding: 24px 7%;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+        }
+
+        header p {
+            margin: 0;
+            color: #dbeafe;
+        }
+
+        nav {
+            padding: 16px 7%;
+            background: white;
+            box-shadow: 0 2px 6px #00000010;
+        }
+
+        nav a {
+            color: #173b72;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 18px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat, .panel {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #0000000d;
+        }
+
+        .stat p {
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .stat h2 {
+            color: #173b72;
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .panel {
+            margin-bottom: 24px;
+        }
+
+        .panel h2 {
+            color: #173b72;
+            margin-top: 0;
+        }
+
+        .application {
+            border: 1px solid #e2e8f0;
+            border-radius: 9px;
+            padding: 18px;
+            margin-top: 15px;
+        }
+
+        .application h3 {
+            margin-top: 0;
+        }
+
+        .details {
+            line-height: 1.8;
+            color: #475569;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 11px;
+            border-radius: 20px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .verified {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .correction {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        button {
+            border: none;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin: 12px 8px 0 0;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+        }
+
+        .verify-btn {
+            background: #15803d;
+        }
+
+        .return-btn {
+            background: #d97706;
+        }
+
+        button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            margin-top: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        .empty {
+            color: #64748b;
+        }
+
+        #message {
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Scholarship Management Portal</h1>
+    <p>Institute Verifier Dashboard</p>
+</header>
+
+<nav>
+    <a href="index.html">Dashboard</a>
+    <a href="applications.html">Student Applications</a>
+    <a href="verification.html">Verification</a>
+    <a href="login.html">Login</a>
+</nav>
+
+<main>
+    <section class="stats">
+        <div class="stat">
+            <p>Total Applications</p>
+            <h2 id="totalCount">0</h2>
+        </div>
+        <div class="stat">
+            <p>Pending Verification</p>
+            <h2 id="pendingCount">0</h2>
+        </div>
+        <div class="stat">
+            <p>Verified</p>
+            <h2 id="verifiedCount">0</h2>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>Application Verification</h2>
+        <p>Review the application details and choose an appropriate action.</p>
+
+        <label for="filter">Filter applications</label>
+        <select id="filter" onchange="displayApplications()">
+            <option value="ALL">All applications</option>
+            <option value="SUBMITTED">Pending verification</option>
+            <option value="VERIFIED">Verified</option>
+            <option value="CORRECTION_REQUIRED">Correction required</option>
+        </select>
+
+        <p id="message" role="status"></p>
+        <div id="applicationList"></div>
+    </section>
+</main>
+
+<footer>
+    Scholarship Management Portal | Application Verification Module
+</footer>
+
+<script>
+    // Sample data for frontend demonstration.
+    // This is not connected to the Java backend.
+    const applications = [
+        {
+            id: "APP001",
+            studentId: "STU001",
+            studentName: "Anu Kumar",
+            scholarship: "Merit Scholarship",
+            status: "SUBMITTED",
+            reason: ""
+        },
+        {
+            id: "APP002",
+            studentId: "STU002",
+            studentName: "Ravi Kumar",
+            scholarship: "Need-Based Scholarship",
+            status: "SUBMITTED",
+            reason: ""
+        },
+        {
+            id: "APP003",
+            studentId: "STU003",
+            studentName: "Priya S",
+            scholarship: "Engineering Scholarship",
+            status: "VERIFIED",
+            reason: "Documents verified"
+        }
+    ];
+
+    function displayApplications() {
+        const list = document.getElementById("applicationList");
+        const filter = document.getElementById("filter").value;
+
+        document.getElementById("totalCount").textContent =
+            applications.length;
+
+        document.getElementById("pendingCount").textContent =
+            applications.filter(app => app.status === "SUBMITTED").length;
+
+        document.getElementById("verifiedCount").textContent =
+            applications.filter(app => app.status === "VERIFIED").length;
+
+        list.replaceChildren();
+
+        const filtered = applications.filter(app =>
+            filter === "ALL" || app.status === filter
+        );
+
+        if (filtered.length === 0) {
+            const empty = document.createElement("p");
+            empty.className = "empty";
+            empty.textContent = "No applications found for this filter.";
+            list.appendChild(empty);
+            return;
+        }
+
+        filtered.forEach(app => {
+            const card = document.createElement("article");
+            card.className = "application";
+
+            const heading = document.createElement("h3");
+            heading.textContent = app.scholarship;
+
+            const details = document.createElement("p");
+            details.className = "details";
+            details.textContent =
+                "Application ID: " + app.id +
+                " | Student ID: " + app.studentId +
+                " | Student: " + app.studentName;
+
+            const status = document.createElement("span");
+            status.className = "status";
+
+            if (app.status === "VERIFIED") {
+                status.classList.add("verified");
+            } else if (app.status === "CORRECTION_REQUIRED") {
+                status.classList.add("correction");
+            }
+
+            status.textContent = app.status;
+
+            card.append(heading, details, status);
+
+            if (app.reason) {
+                const reason = document.createElement("p");
+                reason.textContent = "Remarks: " + app.reason;
+                card.appendChild(reason);
+            }
+
+            if (app.status === "SUBMITTED") {
+                const verifyButton = document.createElement("button");
+                verifyButton.className = "verify-btn";
+                verifyButton.textContent = "Verify Application";
+                verifyButton.onclick = () => updateStatus(
+                    app.id, "VERIFIED"
+                );
+
+                const returnButton = document.createElement("button");
+                returnButton.className = "return-btn";
+                returnButton.textContent = "Return for Correction";
+                returnButton.onclick = () => requestCorrection(app.id);
+
+                card.append(verifyButton, returnButton);
+            }
+
+            list.appendChild(card);
+        });
+    }
+
+    function updateStatus(applicationId, newStatus, reason = "") {
+        const app = applications.find(item => item.id === applicationId);
+
+        if (!app || app.status !== "SUBMITTED") {
+            return;
+        }
+
+        app.status = newStatus;
+        app.reason = reason;
+
+        document.getElementById("message").textContent =
+            applicationId + " updated to " + newStatus + ".";
+
+        document.getElementById("message").style.color = "#15803d";
+
+        displayApplications();
+    }
+
+    function requestCorrection(applicationId) {
+        const reason = prompt("Enter the reason for correction:");
+
+        if (reason === null) {
+            return;
+        }
+
+        if (!reason.trim()) {
+            alert("Please enter a correction reason.");
+            return;
+        }
+
+        updateStatus(
+            applicationId,
+            "CORRECTION_REQUIRED",
+            reason.trim()
+        );
+    }
+
+    displayApplications();
+</script>
+
+</body>
+</html>
