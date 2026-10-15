@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Management Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">ScholarHub</div>
+
+        <nav>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#scholarships">Scholarships</a>
+            <a href="#applications">My Applications</a>
+        </nav>
+
+        <div class="user">Student</div>
+    </header>
+
+    <main class="container" id="dashboard">
+
+        <section class="welcome">
+            <h1>Scholarship Dashboard</h1>
+            <p>Find scholarships and manage your applications in one place.</p>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <h3>Available Scholarships</h3>
+                <p id="totalScholarships">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>My Applications</h3>
+                <p id="totalApplications">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Pending Applications</h3>
+                <p id="pendingApplications">0</p>
+            </div>
+        </section>
+
+        <section id="scholarships">
+            <div class="section-heading">
+                <h2>Available Scholarships</h2>
+                <p>Explore schemes and check eligibility criteria.</p>
+            </div>
+
+            <div class="scholarship-list" id="scholarshipList">
+            </div>
+        </section>
+
+        <section id="applications" class="applications-section">
+            <h2>My Applications</h2>
+            <p>Track the status of your applications.</p>
+
+            <div id="applicationList">
+                <p class="empty-message">
+                    You have not applied for any scholarships yet.
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p>Scholarship Management Portal | HCL Training Project</p>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+```
